@@ -6,8 +6,8 @@ def Block2ConvPool(
     name,
     botton,
     top,
-    sFiler=256,
-    nFiler=64,
+    sFilter=256,
+    nFilter=64,
     offset="(1,0,0)",
     size=(32, 32, 3.5),
     opacity=0.5,
@@ -23,9 +23,9 @@ def Block2ConvPool(
         The node from which the block starts.
     top : str
         The node where the block ends.
-    sFiler : int, optional
+    sFilter : int, optional
         Size of the filter, by default 256.
-    nFiler : int, optional
+    nFilter : int, optional
         Number of filters, by default 64.
     offset : str, optional
         Position offset, by default "(1,0,0)".
@@ -42,8 +42,8 @@ def Block2ConvPool(
     return [
         ToConvConvRelu(
             name=f"ccr_{name}",
-            sFiler=str(sFiler),
-            nFiler=(nFiler, nFiler),
+            sFilter=str(sFilter),
+            nFilter=(nFilter, nFilter),
             offset=offset,
             to=f"({botton}-east)",
             width=(size[2], size[2]),
@@ -67,8 +67,8 @@ def BlockUnconv(
     name,
     botton,
     top,
-    sFiler=256,
-    nFiler=64,
+    sFilter=256,
+    nFilter=64,
     offset="(1,0,0)",
     size=(32, 32, 3.5),
     opacity=0.5,
@@ -84,9 +84,9 @@ def BlockUnconv(
         The node from which the block starts.
     top : str
         The node where the block ends.
-    sFiler : int, optional
+    sFilter : int, optional
         Size of the filter, by default 256.
-    nFiler : int, optional
+    nFilter : int, optional
         Number of filters, by default 64.
     offset : str, optional
         Position offset, by default "(1,0,0)".
@@ -114,8 +114,8 @@ def BlockUnconv(
             name=f"ccr_res_{name}",
             offset="(0,0,0)",
             to=f"(unpool_{name}-east)",
-            sFiler=str(sFiler),
-            nFiler=str(nFiler),
+            sFilter=str(sFilter),
+            nFilter=str(nFilter),
             width=size[2],
             height=size[0],
             depth=size[1],
@@ -125,8 +125,8 @@ def BlockUnconv(
             name=f"ccr_{name}",
             offset="(0,0,0)",
             to=f"(ccr_res_{name}-east)",
-            sFiler=str(sFiler),
-            nFiler=str(nFiler),
+            sFilter=str(sFilter),
+            nFilter=str(nFilter),
             width=size[2],
             height=size[0],
             depth=size[1],
@@ -135,8 +135,8 @@ def BlockUnconv(
             name=f"ccr_res_c_{name}",
             offset="(0,0,0)",
             to=f"(ccr_{name}-east)",
-            sFiler=str(sFiler),
-            nFiler=str(nFiler),
+            sFilter=str(sFilter),
+            nFilter=str(nFilter),
             width=size[2],
             height=size[0],
             depth=size[1],
@@ -146,8 +146,8 @@ def BlockUnconv(
             name=f"{top}",
             offset="(0,0,0)",
             to=f"(ccr_res_c_{name}-east)",
-            sFiler=str(sFiler),
-            nFiler=str(nFiler),
+            sFilter=str(sFilter),
+            nFilter=str(nFilter),
             width=size[2],
             height=size[0],
             depth=size[1],
@@ -161,8 +161,8 @@ def BlockRes(
     name,
     botton,
     top,
-    sFiler=256,
-    nFiler=64,
+    sFilter=256,
+    nFilter=64,
     offset="(0,0,0)",
     size=(32, 32, 3.5),
     opacity=0.5,
@@ -180,9 +180,9 @@ def BlockRes(
         The node from which the block starts.
     top : str
         The node where the block ends.
-    sFiler : int, optional
+    sFilter : int, optional
         Size of the filter, by default 256.
-    nFiler : int, optional
+    nFilter : int, optional
         Number of filters, by default 64.
     offset : str, optional
         Position offset, by default "(0,0,0)".
@@ -204,8 +204,8 @@ def BlockRes(
                 name=f"{layerName}",
                 offset=offset,
                 to=f"({botton}-east)",
-                sFiler=str(sFiler),
-                nFiler=str(nFiler),
+                sFilter=str(sFilter),
+                nFilter=str(nFilter),
                 width=size[2],
                 height=size[0],
                 depth=size[1],
