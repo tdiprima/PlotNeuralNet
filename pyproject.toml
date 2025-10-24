@@ -22,4 +22,4 @@ dependencies = []  # Add runtime dependencies if needed
 
 [project.urls]
 Source = "https://github.com/kgruiz/PlotNeuralNet"
-Original Work = "https://github.com/HarisIqbal88/PlotNeuralNet"
+"Original Work" = "https://github.com/HarisIqbal88/PlotNeuralNet"
