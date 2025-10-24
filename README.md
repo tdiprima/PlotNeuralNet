@@ -22,17 +22,20 @@ This package is based on the original **[PlotNeuralNet by HarisIqbal88](https://
 ### **Installation**
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/kgruiz/PlotNeuralNet.git
    cd PlotNeuralNet
    ```
 
 2. Install the package:
+
    ```bash
    pip install .
    ```
 
 3. Verify the installation:
+
    ```python
    import PlotNeuralNet
    print("PlotNeuralNet installed successfully!")
@@ -50,33 +53,36 @@ The package is organized to simplify the creation of diagrams. It includes Pytho
 You can use the Python API to define your architecture programmatically. For example:
 
 ```python
-from PlotNeuralNet.pycore import tikzeng
-from PlotNeuralNet.pycore.blocks import block_2ConvPool, block_Unconv
+from PlotNeuralNet.PyCore import TikzGen as tikzeng
+from PlotNeuralNet.PyCore.Blocks import Block2ConvPool, BlockUnconv
 
 # Define architecture
 arch = [
-    tikzeng.to_head('..'),
-    tikzeng.to_cor(),
-    tikzeng.to_begin(),
-
+    tikzeng.ToHead(".."),
+    tikzeng.ToCor(),
+    tikzeng.ToBegin(),
     # Input image
-    tikzeng.to_input('../examples/fcn8s/cats.jpg'),
-
+    tikzeng.ToInput('./PlotNeuralNet/examples/fcn8s/cats.jpg'),
     # Encoder
-    *block_2ConvPool(name='b1', botton='input', top='b2', s_filer=256, n_filer=64),
-    *block_2ConvPool(name='b2', botton='b2', top='b3', s_filer=128, n_filer=128),
-
+    *Block2ConvPool(name="b1", botton="input", top="b2", sFilter=256, nFilter=64),
+    *Block2ConvPool(name="b2", botton="b2", top="b3", sFilter=128, nFilter=128),
     # Decoder
-    *block_Unconv(name='b4', botton='b3', top='output', s_filer=64, n_filer=32),
-
+    *BlockUnconv(name="b4", botton="b3", top="output", sFilter=64, nFilter=32),
     # Output layer
-    tikzeng.to_ConvSoftMax(name='softmax', offset="(1,0,0)", to="(output-east)", width=1, height=30, depth=30),
-    tikzeng.to_end(),
+    tikzeng.ToConvSoftMax(
+        name="softmax",
+        offset="(1,0,0)",
+        to="(output-east)",
+        width=1,
+        height=30,
+        depth=30,
+    ),
+    tikzeng.ToEnd(),
 ]
 
 # Generate the architecture diagram
 def main():
-    tikzeng.to_generate(arch, "my_architecture.tex")
+    tikzeng.ToGenerate(arch, "my_architecture.tex")
 
 if __name__ == "__main__":
     main()
@@ -84,11 +90,13 @@ if __name__ == "__main__":
 
 #### **Compile and View the Diagram**
 Run the Python script:
+
 ```bash
 python my_architecture.py
 ```
 
 Compile the `.tex` file with:
+
 ```bash
 bash ../tikzmake.sh my_architecture
 ```
@@ -100,6 +108,7 @@ bash ../tikzmake.sh my_architecture
 You can directly modify `.tex` files in the `examples` directory, such as `examples/FCN-8` or `examples/HED`. Each `.tex` file demonstrates how to use LaTeX for defining architectures.
 
 To compile a `.tex` file, use:
+
 ```bash
 pdflatex <file>.tex
 ```
@@ -112,6 +121,7 @@ The package structure includes predefined resources for easy reuse:
 #### **LaTeX Resources**
 - Available in the `PlotNeuralNet/layers/` directory.
 - Example LaTeX layer definitions:
+
   ```latex
   \input{layers/Box.sty}
   ```
@@ -123,6 +133,7 @@ The package structure includes predefined resources for easy reuse:
 #### **Python Scripts**
 - Python examples for generating diagrams programmatically are in `PlotNeuralNet/pyexamples/`.
 - Example usage:
+
   ```bash
   python PlotNeuralNet/pyexamples/unet.py
   ```
