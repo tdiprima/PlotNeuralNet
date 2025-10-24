@@ -23,7 +23,7 @@ This package is based on the original **[PlotNeuralNet by HarisIqbal88](https://
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/<your-username>/PlotNeuralNet.git
+   git clone https://github.com/kgruiz/PlotNeuralNet.git
    cd PlotNeuralNet
    ```
 
